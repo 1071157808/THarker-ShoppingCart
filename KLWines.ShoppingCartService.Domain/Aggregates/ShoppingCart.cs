@@ -18,6 +18,16 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
             throw new NotImplementedException();
         }
 
+        public Task<int> CountTotalProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> CountUniqueProducts()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task RemoveProductFromBasket(IProduct product)
         {
             throw new NotImplementedException();

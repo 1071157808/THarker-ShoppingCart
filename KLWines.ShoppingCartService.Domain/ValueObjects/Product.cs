@@ -15,5 +15,22 @@ namespace KLWines.ShoppingCartService.Domain.ValueObjects
             Sku = sku;
             Name = name;
         }
+
+
+        public static bool operator ==(Product p1, Product p2) => (p1?.Sku == p2?.Sku);
+        public static bool operator !=(Product p1, Product p2) => !(p1 == p2);
+
+        public override bool Equals(object obj)
+        {
+            var product = obj as Product;
+            return this == product;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 771519440;
+            hashCode = hashCode * -1521134295 + Sku.GetHashCode();
+            return hashCode;
+        }
     }
 }
