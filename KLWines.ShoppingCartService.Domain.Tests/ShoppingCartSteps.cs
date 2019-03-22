@@ -1,4 +1,6 @@
-﻿using KLWines.ShoppingCartService.Domain.Interfaces;
+﻿using KLWines.ShoppingCartService.Domain.Aggregates;
+using KLWines.ShoppingCartService.Domain.Interfaces;
+using KLWines.ShoppingCartService.Domain.ValueObjects;
 using System;
 using TechTalk.SpecFlow;
 
@@ -11,14 +13,18 @@ namespace KLWines.ShoppingCartService.Domain.Tests
         [Given(@"the shopping cart is empty")]
         public void GivenTheShoppingCartIsEmpty()
         {
-
-            ScenarioContext.Current.Pending();
+            _shoppingCart = new ShoppingCart();
         }
         
         [When(@"I add items to the shopping cart")]
-        public void WhenIAddItemsToTheShoppingCart()
+        public void WhenIAddItemsToTheShoppingCart(Table table)
         {
-            ScenarioContext.Current.Pending();
+            foreach(var row in table.Rows)
+            {
+                var sku = int.Parse(row["Sku"]);
+                var qty = int.Parse(row["Qty"]);
+                _shoppingCart.AddProductToBasket(new Product(sku, ""), 1);
+            }
         }
         
         [Then(@"I should have (.*) unique items in my shopping cart")]
