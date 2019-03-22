@@ -79,12 +79,61 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 8
  testRunner.Given("the shopping cart is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku",
+                        "Qty"});
+            table1.AddRow(new string[] {
+                        "1000",
+                        "2"});
 #line 9
- testRunner.When("I add items to the shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 10
+ testRunner.When("I add items to the shopping cart", ((string)(null)), table1, "When ");
+#line 12
  testRunner.Then("I should have 1 unique items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 11
- testRunner.And("I should have 4 total items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 13
+ testRunner.And("I should have 2 total items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("AddItemsToShoppingCartThenRemoveThemAll", SourceLine=14)]
+        public virtual void AddItemsToShoppingCartThenRemoveThemAll()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AddItemsToShoppingCartThenRemoveThemAll", null, ((string[])(null)));
+#line 15
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 16
+ testRunner.Given("the shopping cart is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku",
+                        "Qty"});
+            table2.AddRow(new string[] {
+                        "1000",
+                        "2"});
+            table2.AddRow(new string[] {
+                        "1001",
+                        "1"});
+#line 17
+ testRunner.When("I add items to the shopping cart", ((string)(null)), table2, "When ");
+#line 21
+ testRunner.Then("I should have 2 unique items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 22
+ testRunner.And("I should have 3 total items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table3.AddRow(new string[] {
+                        "1000"});
+            table3.AddRow(new string[] {
+                        "1001"});
+#line 23
+ testRunner.When("I remove items from the shopping cart", ((string)(null)), table3, "When ");
+#line 27
+ testRunner.Then("I should have 0 unique items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 28
+ testRunner.And("I should have 0 total items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

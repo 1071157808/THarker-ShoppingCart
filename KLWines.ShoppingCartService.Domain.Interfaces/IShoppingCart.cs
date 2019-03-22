@@ -11,5 +11,9 @@ namespace KLWines.ShoppingCartService.Domain.Interfaces
         Task AddProductToBasket(IProduct product, int qty = 1);
         Task RemoveProductFromBasket(IProduct product);
         Task AdjustProductQty(IProduct product, int qty = 1);
+
+
+        Task<int> CountUniqueProducts();
+        Task<int> CountTotalProducts();
     }
 }
