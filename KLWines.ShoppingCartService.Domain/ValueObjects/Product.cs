@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KLWines.ShoppingCartService.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
