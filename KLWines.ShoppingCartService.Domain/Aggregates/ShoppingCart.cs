@@ -19,15 +19,15 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         }
 
         #region Public Commands
-        public Task AddProductToBasket(IProduct product, int qty = 1)
+        public async Task AddProductToBasket(IProduct product, int qty = 1)
         {
             throw new NotImplementedException();
         }
-        public Task AdjustProductQty(IProduct product, int qty = 1)
+        public async Task AdjustProductQty(IProduct product, int qty = 1)
         {
             throw new NotImplementedException();
         }
-        public Task RemoveProductFromBasket(IProduct product)
+        public async Task RemoveProductFromBasket(IProduct product)
         {
             throw new NotImplementedException();
         }
@@ -35,14 +35,8 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 
 
         #region Public Getters
-        public Task<int> CountTotalProducts()
-        {
-            throw new NotImplementedException();
-        }
-        public Task<int> CountUniqueProducts()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<int> CountTotalProducts() => BasketItems.Select(i => i.Product).Distinct().Count();
+        public async Task<int> CountUniqueProducts() => BasketItems.Sum(i => i.Qty);
         #endregion
 
 
