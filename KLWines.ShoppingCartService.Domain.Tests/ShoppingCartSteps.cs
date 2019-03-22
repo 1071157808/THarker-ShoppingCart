@@ -25,7 +25,7 @@ namespace KLWines.ShoppingCartService.Domain.Tests
             {
                 var sku = int.Parse(row["Sku"]);
                 var qty = int.Parse(row["Qty"]);
-                await _shoppingCart.AddProductToBasket(new Product(sku, ""), 1);
+                await _shoppingCart.AddProductToBasket(new Product(sku, ""), qty);
             }
         }
 
@@ -43,12 +43,14 @@ namespace KLWines.ShoppingCartService.Domain.Tests
         [Then(@"I should have ([0-9]*) unique items in my shopping cart")]
         public async Task ThenIShouldHaveUniqueItemsInMyShoppingCart(int expectedValue)
         {
-            Assert.AreEqual(expectedValue, await _shoppingCart.CountUniqueProducts());
+            var actual = await _shoppingCart.CountUniqueProducts();
+         Assert.AreEqual(expectedValue, await _shoppingCart.CountUniqueProducts());
         }
         
         [Then(@"I should have ([0-9]*) total items in my shopping cart")]
         public async Task ThenIShouldHaveTotalItemsInMyShoppingCart(int expectedValue)
         {
+            await _shoppingCart.CountTotalProducts();
             Assert.AreEqual(expectedValue, await _shoppingCart.CountTotalProducts());
         }
     }

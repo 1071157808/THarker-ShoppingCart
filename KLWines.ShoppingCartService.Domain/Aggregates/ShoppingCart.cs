@@ -13,11 +13,11 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 {
     public class ShoppingCart : BaseEventStoreAggregate, IShoppingCart
     {
-        private HashSet<BasketItem> BasketItems { get; set; }
+        private List<BasketItem> BasketItems { get; set; }
 
         public ShoppingCart()
         {
-
+            BasketItems = new HashSet<BasketItem>();
         }
 
         #region Public Commands
@@ -42,8 +42,8 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 
 
         #region Public Getters
-        public async Task<int> CountTotalProducts() => BasketItems.Select(i => i.Product).Distinct().Count();
-        public async Task<int> CountUniqueProducts() => BasketItems.Sum(i => i.Qty);
+        public async Task<int> CountUniqueProducts() => BasketItems.Select(i => i.Product).Distinct().Count();
+        public async Task<int> CountTotalProducts() => BasketItems.Sum(i => i.Qty);
         #endregion
 
 
@@ -52,7 +52,7 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         private void Apply(BasketItemRemoved @event) => BasketItems.RemoveWhere(i => i.Product == @event.Product);
         private void Apply(BasketItemQtyAdjusted @event)
         {
-            BasketItems.RemoveWhere(i => i.Product == @event.Product);
+            BasketItems.RemoveAll(i => i.Product == @event.Product);
             BasketItems.Add(new BasketItem(@event.Product, @event.Qty));
         }
         #endregion
@@ -88,8 +88,8 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 
     class Snapshot : ISnapshot
     {
-        public HashSet<BasketItem> BasketItems { get; private set; }
-        public Snapshot(HashSet<BasketItem> basketItems)
+        public List<BasketItem> BasketItems { get; private set; }
+        public Snapshot(List<BasketItem> basketItems)
         {
             BasketItems = basketItems;
         }
