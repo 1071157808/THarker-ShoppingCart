@@ -17,14 +17,12 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 
         public ShoppingCart()
         {
-            BasketItems = new HashSet<BasketItem>();
+            BasketItems = new List<BasketItem>();
         }
 
         #region Public Commands
-        public async Task AddProductToBasket(IProduct product, int qty = 1)
+        public async Task AddProductToBasket(IProduct product, Quantity qty)
         {
-            await ValidateProduct(product);
-            await ValidateQty(qty);
             await RaiseEvent(new BasketItemAdded(product, qty));
         }
         public async Task AdjustProductQty(IProduct product, int qty = 1)
@@ -58,14 +56,14 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #endregion
 
         #region Validators
-        public async Task ValidateProduct(IProduct product)
+        protected async Task ValidateProduct(IProduct product)
         {
             if(product == null)
             {
                 throw new ProductIsNullException();
             }
         }
-        public async Task ValidateQty(int qty)
+        protected async Task ValidateQty(int qty)
         {
             if(qty < 1)
             {

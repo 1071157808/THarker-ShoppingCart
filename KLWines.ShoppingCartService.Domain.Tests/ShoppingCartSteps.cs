@@ -1,8 +1,10 @@
 ﻿using KLWines.ShoppingCartService.Domain.Aggregates;
 using KLWines.ShoppingCartService.Domain.Interfaces;
+using KLWines.ShoppingCartService.Domain.Tests.Models;
 using KLWines.ShoppingCartService.Domain.ValueObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -15,17 +17,16 @@ namespace KLWines.ShoppingCartService.Domain.Tests
         [Given(@"the shopping cart is empty")]
         public void GivenTheShoppingCartIsEmpty()
         {
+            ScenarioContext.Current.Add()
             _shoppingCart = new ShoppingCart();
         }
         
         [When(@"I add items to the shopping cart")]
-        public async Task WhenIAddItemsToTheShoppingCart(Table table)
+        public async Task WhenIAddItemsToTheShoppingCart(IEnumerable<ProductRow> table)
         {
-            foreach(var row in table.Rows)
+            foreach(var row in table)
             {
-                var sku = int.Parse(row["Sku"]);
-                var qty = int.Parse(row["Qty"]);
-                await _shoppingCart.AddProductToBasket(new Product(sku, ""), qty);
+                await _shoppingCart.AddProductToBasket(new Product(row.Sku, ""), row.Qty);
             }
         }
 

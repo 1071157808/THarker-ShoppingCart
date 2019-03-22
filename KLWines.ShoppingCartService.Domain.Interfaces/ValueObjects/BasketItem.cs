@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace KLWines.ShoppingCartService.Domain.Events
+namespace KLWines.ShoppingCartService.Interfaces.ValueObjects
 {
-    public class BasketItemAdded : IEvent
+    public struct BasketItem
     {
         public Product Product { get; private set; }
-        public int Qty { get; private set; }
+        public uint Qty { get; private set; }
 
-        public BasketItemAdded(Product product, int qty = 1)
+        public BasketItem(Product product, uint qty = 1)
         {
             Product = product;
             Qty = qty;

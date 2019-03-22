@@ -13,6 +13,8 @@ namespace KLWines.ShoppingCartService.Domain
         protected string EventStoreKey { get; set; }
         protected ulong Version { get; set; }
 
+        protected List<IEvent> NewEvents { get; set; }
+
         public async Task InitEventStore(IEventStore eventStore, string eventStoreKey)
         {
             EventStore = eventStore;
@@ -39,7 +41,6 @@ namespace KLWines.ShoppingCartService.Domain
 
                 await EventStore.CreateSnapshot(EventStoreKey, Version, CreateSnapshot());
             }
-
         }
 
         protected abstract Task ApplyEvent(IEvent @event);
