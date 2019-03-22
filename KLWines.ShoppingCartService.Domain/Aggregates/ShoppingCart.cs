@@ -1,5 +1,6 @@
 ﻿using Eveneum;
 using KLWines.ShoppingCartService.Domain.Events;
+using KLWines.ShoppingCartService.Domain.Exceptions;
 using KLWines.ShoppingCartService.Domain.Interfaces;
 using KLWines.ShoppingCartService.Domain.ValueObjects;
 using System;
@@ -22,15 +23,20 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #region Public Commands
         public async Task AddProductToBasket(IProduct product, int qty = 1)
         {
-            throw new NotImplementedException();
+            await ValidateProduct(product);
+            await ValidateQty(qty);
+            await RaiseEvent(new BasketItemAdded(product, qty));
         }
         public async Task AdjustProductQty(IProduct product, int qty = 1)
         {
-            throw new NotImplementedException();
+            await ValidateProduct(product);
+            await ValidateQty(qty);
+            await RaiseEvent(new BasketItemQtyAdjusted(product, qty));
         }
         public async Task RemoveProductFromBasket(IProduct product)
         {
-            throw new NotImplementedException();
+            await ValidateProduct(product);
+            await RaiseEvent(new BasketItemRemoved(product));
         }
         #endregion
 
@@ -48,6 +54,23 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         {
             BasketItems.RemoveWhere(i => i.Product == @event.Product);
             BasketItems.Add(new BasketItem(@event.Product, @event.Qty));
+        }
+        #endregion
+
+        #region Validators
+        public async Task ValidateProduct(IProduct product)
+        {
+            if(product == null)
+            {
+                throw new ProductIsNullException();
+            }
+        }
+        public async Task ValidateQty(int qty)
+        {
+            if(qty < 1)
+            {
+                throw new ProductQtyMustBeGreaterThanOneException(qty);
+            }
         }
         #endregion
 
