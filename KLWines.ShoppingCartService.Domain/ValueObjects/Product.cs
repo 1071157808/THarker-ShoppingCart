@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KLWines.ShoppingCartService.Domain.ValueObjects
 {
-    public class Product : IBasketItem
+    public class Product : IProduct
     {
         public int Sku { get; private set; }
         public string Name { get; private set; }
