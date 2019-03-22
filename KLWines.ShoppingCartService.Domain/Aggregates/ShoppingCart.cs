@@ -1,4 +1,5 @@
-﻿using KLWines.ShoppingCartService.Domain.Interfaces;
+﻿using KLWines.ShoppingCartService.Domain.Events;
+using KLWines.ShoppingCartService.Domain.Interfaces;
 using KLWines.ShoppingCartService.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,9 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #endregion
 
 
+        #region EventHandlers
+        private void Apply(BasketItemAdded @event) => BasketItems.Add(new BasketItem(@event.Product, @event.Qty));
+        #endregion
 
 
 
