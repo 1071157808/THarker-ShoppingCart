@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KLWines.ShoppingCartService.Domain.Core;
 
 namespace KLWines.ShoppingCartService.Domain.Aggregates
 {
@@ -21,19 +22,16 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         }
 
         #region Public Commands
-        public async Task AddProductToBasket(IProduct product, Quantity qty)
+        public async Task AddProductToBasket(Product product, ProductQuantity qty)
         {
             await RaiseEvent(new BasketItemAdded(product, qty));
         }
-        public async Task AdjustProductQty(IProduct product, int qty = 1)
+        public async Task AdjustProductQty(Product product, ProductQuantity qty)
         {
-            await ValidateProduct(product);
-            await ValidateQty(qty);
             await RaiseEvent(new BasketItemQtyAdjusted(product, qty));
         }
-        public async Task RemoveProductFromBasket(IProduct product)
+        public async Task RemoveProductFromBasket(Product product)
         {
-            await ValidateProduct(product);
             await RaiseEvent(new BasketItemRemoved(product));
         }
         #endregion
@@ -41,7 +39,7 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 
         #region Public Getters
         public async Task<int> CountUniqueProducts() => BasketItems.Select(i => i.Product).Distinct().Count();
-        public async Task<int> CountTotalProducts() => BasketItems.Sum(i => i.Qty);
+        public async Task<uint> CountTotalProducts() => BasketItems.Sum(i => i.Qty);
         #endregion
 
 

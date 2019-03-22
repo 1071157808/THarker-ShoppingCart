@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.fsproj" />
     <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Interfaces\KLWines.ShoppingCartService.Domain.Interfaces.csproj" />
   </ItemGroup>
 

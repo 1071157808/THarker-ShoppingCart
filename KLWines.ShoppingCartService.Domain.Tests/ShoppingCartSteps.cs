@@ -1,18 +1,23 @@
 ﻿using KLWines.ShoppingCartService.Domain.Aggregates;
 using KLWines.ShoppingCartService.Domain.Interfaces;
 using KLWines.ShoppingCartService.Domain.Tests.Models;
-using KLWines.ShoppingCartService.Domain.ValueObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace KLWines.ShoppingCartService.Domain.Tests
 {
     [Binding]
     public class ShoppingCartSteps
     {
+        [TechTalk.SpecFlow.StepArgumentTransformation]
+        public static IEnumerable<ProductRow> Convert(Table table) => table.CreateSet<ProductRow>();
+
+
+
         private IShoppingCart _shoppingCart;
         [Given(@"the shopping cart is empty")]
         public void GivenTheShoppingCartIsEmpty()

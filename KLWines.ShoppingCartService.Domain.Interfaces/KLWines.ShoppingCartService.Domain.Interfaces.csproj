@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.fsproj" />
+  </ItemGroup>
+
 </Project>
