@@ -7,5 +7,11 @@ namespace KLWines.ShoppingCartService.Domain.Events
 {
     public class BasketItemRemoved : IEvent
     {
+        public IProduct Product { get; private set; }
+
+        public BasketItemRemoved(IProduct product)
+        {
+            Product = product;
+        }
     }
 }
