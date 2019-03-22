@@ -1,4 +1,5 @@
-﻿using KLWines.ShoppingCartService.Domain.Events;
+﻿using Eveneum;
+using KLWines.ShoppingCartService.Domain.Events;
 using KLWines.ShoppingCartService.Domain.Interfaces;
 using KLWines.ShoppingCartService.Domain.ValueObjects;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KLWines.ShoppingCartService.Domain.Aggregates
 {
-    public class ShoppingCart : IShoppingCart
+    public class ShoppingCart : BaseEventStoreAggregate, IShoppingCart
     {
         private HashSet<BasketItem> BasketItems { get; set; }
 
@@ -51,8 +52,23 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #endregion
 
 
+        protected override async Task ApplyEvent(IEvent @event)
+        {
+            dynamic me = this;
+            me.Apply((dynamic)@event);
+        }
+
+        protected override ISnapshot CreateSnapshot() => new Snapshot(BasketItems);
 
 
+    }
 
+    class Snapshot : ISnapshot
+    {
+        public HashSet<BasketItem> BasketItems { get; private set; }
+        public Snapshot(HashSet<BasketItem> basketItems)
+        {
+            BasketItems = basketItems;
+        }
     }
 }
