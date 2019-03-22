@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KLWines.ShoppingCartService.Domain.ValueObjects
 {
-    public class Product
+    public class Product : IBasketItem
     {
     }
 }

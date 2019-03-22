@@ -8,8 +8,8 @@ namespace KLWines.ShoppingCartService.Domain.Interfaces
 {
     public interface IShoppingCart
     {
-        Task AddProductToBasket(Product product, int qty = 1);
-        Task RemoveProductFromBasket(Product product);
-        Task AdjustProductQty(Product product, int qty = 1);
+        Task AddProductToBasket(IProduct product, int qty = 1);
+        Task RemoveProductFromBasket(IProduct product);
+        Task AdjustProductQty(IProduct product, int qty = 1);
     }
 }

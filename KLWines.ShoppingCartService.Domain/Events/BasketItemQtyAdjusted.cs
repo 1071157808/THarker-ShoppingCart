@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KLWines.ShoppingCartService.Domain.Events
 {
-    public class BasketItemQtyAdjusted
+    public class BasketItemQtyAdjusted : IEvent
     {
     }
 }
