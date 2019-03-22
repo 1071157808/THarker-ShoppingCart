@@ -3,6 +3,7 @@ using KLWines.ShoppingCartService.Domain.Interfaces;
 using KLWines.ShoppingCartService.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,12 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 
         #region EventHandlers
         private void Apply(BasketItemAdded @event) => BasketItems.Add(new BasketItem(@event.Product, @event.Qty));
+        private void Apply(BasketItemRemoved @event) => BasketItems.RemoveWhere(i => i.Product == @event.Product);
+        private void Apply(BasketItemQtyAdjusted @event)
+        {
+            BasketItems.RemoveWhere(i => i.Product == @event.Product);
+            BasketItems.Add(new BasketItem(@event.Product, @event.Qty));
+        }
         #endregion
 
 
