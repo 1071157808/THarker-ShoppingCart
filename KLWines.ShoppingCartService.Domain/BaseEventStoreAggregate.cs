@@ -1,5 +1,4 @@
-﻿using Eveneum;
-using KLWines.ShoppingCartService.Domain.Interfaces;
+﻿using KLWines.ShoppingCartService.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +15,7 @@ namespace KLWines.ShoppingCartService.Domain
 
         protected List<IEvent> NewEvents { get; set; }
 
-        public BaseEventStoreAggregate(List<IEvent> events)
+        public BaseEventStoreAggregate(List<IEvent> events = null, ISnapshot snapshot = null)
         {
             if(events == null)
             {
@@ -40,6 +39,7 @@ namespace KLWines.ShoppingCartService.Domain
         }
 
         protected abstract Task ApplyEvent(IEvent @event);
+        protected abstract Task ApplySnapshot(ISnapshot snapshot);
 
         public IEnumerable<IEvent> PopNewEvents()
         {

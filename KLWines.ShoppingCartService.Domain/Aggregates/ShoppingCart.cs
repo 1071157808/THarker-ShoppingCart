@@ -1,5 +1,4 @@
-﻿using Eveneum;
-using KLWines.ShoppingCartService.Domain.Interfaces;
+﻿using KLWines.ShoppingCartService.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,7 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
     {
         private List<BasketItem> BasketItems { get; set; }
 
-        public ShoppingCart(List<IEvent> events = null) : base(events)
+        public ShoppingCart(List<IEvent> events = null, Snapshot snapshot = null) : base(events, snapshot)
         {
             BasketItems = new List<BasketItem>();
         }
@@ -59,9 +58,14 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
             me.Apply((dynamic)@event);
         }
 
+        protected override async Task ApplySnapshot(ISnapshot snapshot)
+        {
+            BasketItems = ((Snapshot)snapshot).BasketItems;
+        }
+
     }
 
-    class Snapshot : ISnapshot
+    public class Snapshot : ISnapshot
     {
         public List<BasketItem> BasketItems { get; private set; }
         public Snapshot(List<BasketItem> basketItems)
