@@ -122,19 +122,6 @@ this.ScenarioInitialize(scenarioInfo);
 #line 22
  testRunner.And("I should have 3 total items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Sku"});
-            table3.AddRow(new string[] {
-                        "1000"});
-            table3.AddRow(new string[] {
-                        "1001"});
-#line 23
- testRunner.When("I remove items from the shopping cart", ((string)(null)), table3, "When ");
-#line 27
- testRunner.Then("I should have 0 unique items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 28
- testRunner.And("I should have 0 total items in my shopping cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
             this.ScenarioCleanup();
         }
         
@@ -147,3 +134,4 @@ this.ScenarioInitialize(scenarioInfo);
 }
 #pragma warning restore
 #endregion
+

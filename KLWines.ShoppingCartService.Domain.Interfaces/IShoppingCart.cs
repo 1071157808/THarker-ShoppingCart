@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using KLWines.ShoppingCartService.Domain.Core;
+using KLWines.ShoppingCartService.Domain.Core.ValueObjects;
 
 namespace KLWines.ShoppingCartService.Domain.Interfaces
 {
@@ -13,7 +14,7 @@ namespace KLWines.ShoppingCartService.Domain.Interfaces
         Task AdjustProductQty(Product product, ProductQuantity qty);
 
 
-        Task<int> CountUniqueProducts();
-        Task<int> CountTotalProducts();
+        int CountUniqueProducts();
+        long CountTotalProducts();
     }
 }

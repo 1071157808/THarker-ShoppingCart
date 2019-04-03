@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.fsproj" />
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace KLWines.ShoppingCartService.Domain.Tests.Models
 {
-    public class ProductRow
+    public class SkuRow
     {
         public uint Sku { get; set; }
-        public uint Qty { get; set; }
     }
 }

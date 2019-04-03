@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ProductTable.cs" />
+    <Compile Include="Models\SkuRow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingCart.feature.cs">
       <AutoGen>True</AutoGen>
@@ -122,6 +123,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.csproj">
+      <Project>{B23B86F9-DA6B-490D-9D02-62D75DCE210A}</Project>
+      <Name>KLWines.ShoppingCartService.Domain.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Interfaces\KLWines.ShoppingCartService.Domain.Interfaces.csproj">
       <Project>{0593A9E2-B66B-40E6-A796-6C34B50BDE2D}</Project>
       <Name>KLWines.ShoppingCartService.Domain.Interfaces</Name>

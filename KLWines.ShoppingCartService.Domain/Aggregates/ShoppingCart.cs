@@ -1,14 +1,13 @@
 ﻿using Eveneum;
-using KLWines.ShoppingCartService.Domain.Events;
-using KLWines.ShoppingCartService.Domain.Exceptions;
 using KLWines.ShoppingCartService.Domain.Interfaces;
-using KLWines.ShoppingCartService.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KLWines.ShoppingCartService.Domain.Core;
+using KLWines.ShoppingCartService.Domain.Core.ValueObjects;
+using KLWines.ShoppingCartService.Domain.Core.Events;
 
 namespace KLWines.ShoppingCartService.Domain.Aggregates
 {
@@ -16,7 +15,7 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
     {
         private List<BasketItem> BasketItems { get; set; }
 
-        public ShoppingCart()
+        public ShoppingCart(List<IEvent> events = null) : base(events)
         {
             BasketItems = new List<BasketItem>();
         }
@@ -24,49 +23,32 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #region Public Commands
         public async Task AddProductToBasket(Product product, ProductQuantity qty)
         {
-            await RaiseEvent(new BasketItemAdded(product, qty));
+            await RaiseEvent(new ProductAddedToShoppingCart(product, qty));
         }
         public async Task AdjustProductQty(Product product, ProductQuantity qty)
         {
-            await RaiseEvent(new BasketItemQtyAdjusted(product, qty));
+            await RaiseEvent(new ProductQuantityAdjusted(product, qty));
         }
         public async Task RemoveProductFromBasket(Product product)
         {
-            await RaiseEvent(new BasketItemRemoved(product));
+            await RaiseEvent(new ProductRemovedFromShoppingCart(product));
         }
         #endregion
 
 
         #region Public Getters
-        public async Task<int> CountUniqueProducts() => BasketItems.Select(i => i.Product).Distinct().Count();
-        public async Task<uint> CountTotalProducts() => BasketItems.Sum(i => i.Qty);
+        public int CountUniqueProducts() => BasketItems.Select(i => i.Product).Distinct().Count();
+        public long CountTotalProducts() => BasketItems.Sum(i => i.Qty.Value);
         #endregion
 
 
         #region EventHandlers
-        private void Apply(BasketItemAdded @event) => BasketItems.Add(new BasketItem(@event.Product, @event.Qty));
-        private void Apply(BasketItemRemoved @event) => BasketItems.RemoveWhere(i => i.Product == @event.Product);
-        private void Apply(BasketItemQtyAdjusted @event)
+        private void Apply(ProductAddedToShoppingCart @event) => BasketItems.Add(new BasketItem(@event.Product, @event.Qty));
+        private void Apply(ProductRemovedFromShoppingCart @event) => BasketItems.RemoveAll(i => i.Product == @event.Product);
+        private void Apply(ProductQuantityAdjusted @event)
         {
             BasketItems.RemoveAll(i => i.Product == @event.Product);
             BasketItems.Add(new BasketItem(@event.Product, @event.Qty));
-        }
-        #endregion
-
-        #region Validators
-        protected async Task ValidateProduct(IProduct product)
-        {
-            if(product == null)
-            {
-                throw new ProductIsNullException();
-            }
-        }
-        protected async Task ValidateQty(int qty)
-        {
-            if(qty < 1)
-            {
-                throw new ProductQtyMustBeGreaterThanOneException(qty);
-            }
         }
         #endregion
 
@@ -76,9 +58,6 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
             dynamic me = this;
             me.Apply((dynamic)@event);
         }
-
-        protected override ISnapshot CreateSnapshot() => new Snapshot(BasketItems);
-
 
     }
 
