@@ -13,37 +13,43 @@ namespace KLWines.ShoppingCartService.Domain
         
         protected ulong Version { get; set; }
 
-        protected List<IEvent> NewEvents { get; set; }
+        protected readonly List<IEvent> NewEvents = new List<IEvent>();
 
-        public BaseEventStoreAggregate(List<IEvent> events = null, ISnapshot snapshot = null)
+        public BaseEventStoreAggregate(IEnumerable<IEvent> events = null, ISnapshot snapshot = null)
         {
-            if(events == null)
+            if(snapshot != null)
             {
-                events = new List<IEvent>();
+                ApplySnapshot(snapshot);
             }
-            else
+            if(events != null)
             {
-                foreach(var @event in events)
+                foreach (var @event in events)
                 {
-                    var task = ApplyEvent(@event).ConfigureAwait(false);
+                    ApplyEvent(@event);
                 }
             }
-            NewEvents = new List<IEvent>();
         }
 
-        protected async Task RaiseEvent(IEvent @event)
+        protected void RaiseEvent(IEvent @event)
         {
-            await ApplyEvent(@event);
             NewEvents.Add(@event);
-            Version++;
         }
 
-        protected abstract Task ApplyEvent(IEvent @event);
-        protected abstract Task ApplySnapshot(ISnapshot snapshot);
+        protected abstract void ApplyEvent(IEvent @event);
+        protected abstract void ApplySnapshot(ISnapshot snapshot);
 
-        public IEnumerable<IEvent> PopNewEvents()
+        public void ApplyEvents(IReadOnlyCollection<IEvent> events)
         {
-            var newEvents = NewEvents.Select(x => x);
+            foreach(var @event in events)
+            {
+                ApplyEvent(@event);
+                Version++;
+            }
+        }
+
+        public IReadOnlyCollection<IEvent> PopNewEvents()
+        {
+            var newEvents = NewEvents.ToArray();
             NewEvents.Clear();
             return newEvents;
         }

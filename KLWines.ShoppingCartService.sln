@@ -9,13 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLWines.ShoppingCartService.Domain.Interfaces", "KLWines.ShoppingCartService.Domain.Interfaces\KLWines.ShoppingCartService.Domain.Interfaces.csproj", "{0593A9E2-B66B-40E6-A796-6C34B50BDE2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.Domain.Core", "KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.csproj", "{B23B86F9-DA6B-490D-9D02-62D75DCE210A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLWines.ShoppingCartService.Domain.Core", "KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.csproj", "{B23B86F9-DA6B-490D-9D02-62D75DCE210A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.OrleansHost", "KLWines.ShoppingCartService.OrleansHost\KLWines.ShoppingCartService.OrleansHost.csproj", "{B45B6383-E5FE-487D-935B-F3CB2380B7B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.Orleans.ShoppingCartGrain", "KLWines.ShoppingCartService.Orleans.ShoppingCartGrain\KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.csproj", "{CE292902-8937-453F-A81A-CCC31A5BDDE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface", "KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface\KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface.csproj", "{D45EF4C7-7744-4923-A4D1-B315943BABB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces", "KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface\KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces.csproj", "{D45EF4C7-7744-4923-A4D1-B315943BABB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

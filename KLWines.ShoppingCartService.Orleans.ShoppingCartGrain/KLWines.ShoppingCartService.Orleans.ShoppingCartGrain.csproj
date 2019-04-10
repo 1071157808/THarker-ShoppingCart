@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseGrain.cs" />
     <Compile Include="ShoppingCartGrain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,9 +63,9 @@
       <Project>{470aac1b-ecdf-4662-a315-7dadad5b590b}</Project>
       <Name>KLWines.ShoppingCartService.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface\KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface.csproj">
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface\KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces.csproj">
       <Project>{D45EF4C7-7744-4923-A4D1-B315943BABB2}</Project>
-      <Name>KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface</Name>
+      <Name>KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

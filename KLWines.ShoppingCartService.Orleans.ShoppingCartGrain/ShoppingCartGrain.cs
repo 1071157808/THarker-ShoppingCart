@@ -4,6 +4,7 @@ using Orleans;
 using KLWines.ShoppingCartService.Domain.Core.ValueObjects;
 using KLWines.ShoppingCartService.Domain.Aggregates;
 using Microsoft.Azure.Documents.Client;
+using KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces;
 
 namespace KLWines.ShoppingCartService.Orleans.ShoppingCartGrain
 {
@@ -35,15 +36,36 @@ namespace KLWines.ShoppingCartService.Orleans.ShoppingCartGrain
             {
                 this.Version = stream.Value.Version;
 
-                this._shoppingCart = new ShoppingChart(stream.Value.Events, stream.Value.Snapshot);
+                this._shoppingCart = new ShoppingCart(stream.Value.Events, stream.Value.Snapshot);
             }
         }
 
 
 
-        private ShoppingCart _shoppingCart { get; set; }
-        public async Task AddProductToBasket(Product product, ProductQuantity qty) => await _shoppingCart.AddProductToBasket(product, qty);
+        private Domain.Aggregates.ShoppingCart _shoppingCart { get; set; }
+        public async Task AddProductToBasket(Product product, ProductQuantity qty)
+        {
+            try
+            {
+                await _shoppingCart.AddProductToBasket(product, qty);
+            }
+            catch(Exception ex)
+            {
+                //if exception ocurs while executing the command, we want to rollback any events that may have been added where the action wasn't successful
+                _shoppingCart.PopNewEvents();
+                throw;
+            }
+            var newEvents = _shoppingCart.PopNewEvents();
+
+            if(newEvents.Count > 0)
+            {
+                //store in event store
+                _shoppingCart.ApplyEvents(newEvents);
+                //create snapshot
+            }
+        }
         public async Task RemoveProductFromBasket(Product product) => await _shoppingCart.RemoveProductFromBasket(product);
         public async Task AdjustProductQuantity(Product product, ProductQuantity qty) => await _shoppingCart.AdjustProductQty(product, qty);
+
     }
 }

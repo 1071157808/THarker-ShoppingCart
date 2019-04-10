@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Orleans;
 using KLWines.ShoppingCartService.Domain.Core.ValueObjects;
 
-namespace KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface
+namespace KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces
 {
     /// <summary>
     /// Grain interface IGrain1

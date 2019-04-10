@@ -125,9 +125,9 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface\KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface.csproj">
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface\KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces.csproj">
       <Project>{d45ef4c7-7744-4923-a4d1-b315943babb2}</Project>
-      <Name>KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface</Name>
+      <Name>KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\KLWines.ShoppingCartService.Orleans.ShoppingCartGrain\KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.csproj">
       <Project>{ce292902-8937-453f-a81a-ccc31a5bdde1}</Project>

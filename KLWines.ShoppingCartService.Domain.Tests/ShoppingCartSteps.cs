@@ -24,8 +24,18 @@ namespace KLWines.ShoppingCartService.Domain.Tests
         {
             //ScenarioContext.Current.Add();
             _shoppingCart = new ShoppingCart();
+
+
         }
-        
+        [Given(@"the i have these items in my shopping cart")]
+        public void GivenTheShoppingCartIsEmpty(IEnumerable<ProductRow> table)
+        {
+            //ScenarioContext.Current.Add();
+            _shoppingCart = new ShoppingCart();
+
+
+        }
+
         [When(@"I add items to the shopping cart")]
         public async Task WhenIAddItemsToTheShoppingCart(IEnumerable<ProductRow> table)
         {

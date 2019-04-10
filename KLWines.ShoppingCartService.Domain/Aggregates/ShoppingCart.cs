@@ -22,15 +22,21 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #region Public Commands
         public async Task AddProductToBasket(Product product, ProductQuantity qty)
         {
-            await RaiseEvent(new ProductAddedToShoppingCart(product, qty));
+            /*
+             * Do any db checks & validation checks
+             */ 
+
+
+            //if successful rais event that item was added
+            RaiseEvent(new ProductAddedToShoppingCart(product, qty));
         }
         public async Task AdjustProductQty(Product product, ProductQuantity qty)
         {
-            await RaiseEvent(new ProductQuantityAdjusted(product, qty));
+            RaiseEvent(new ProductQuantityAdjusted(product, qty));
         }
         public async Task RemoveProductFromBasket(Product product)
         {
-            await RaiseEvent(new ProductRemovedFromShoppingCart(product));
+            RaiseEvent(new ProductRemovedFromShoppingCart(product));
         }
         #endregion
 
@@ -52,13 +58,13 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #endregion
 
 
-        protected override async Task ApplyEvent(IEvent @event)
+        protected override void ApplyEvent(IEvent @event)
         {
             dynamic me = this;
             me.Apply((dynamic)@event);
         }
 
-        protected override async Task ApplySnapshot(ISnapshot snapshot)
+        protected override void ApplySnapshot(ISnapshot snapshot)
         {
             BasketItems = ((Snapshot)snapshot).BasketItems;
         }
