@@ -15,13 +15,19 @@ namespace KLWines.ShoppingCartService.Domain
 
         protected readonly List<IEvent> NewEvents = new List<IEvent>();
 
+        public BaseEventStoreAggregate() { }
         public BaseEventStoreAggregate(IEnumerable<IEvent> events = null, ISnapshot snapshot = null)
         {
-            if(snapshot != null)
+            Init(events, snapshot);
+        }
+
+        public void Init(IEnumerable<IEvent> events = null, ISnapshot snapshot = null)
+        {
+            if (snapshot != null)
             {
                 ApplySnapshot(snapshot);
             }
-            if(events != null)
+            if (events != null)
             {
                 foreach (var @event in events)
                 {

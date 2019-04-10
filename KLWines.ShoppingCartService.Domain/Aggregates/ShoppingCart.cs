@@ -14,6 +14,7 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
     {
         private List<BasketItem> BasketItems { get; set; }
 
+        public ShoppingCart() { }
         public ShoppingCart(List<IEvent> events = null, Snapshot snapshot = null) : base(events, snapshot)
         {
             BasketItems = new List<BasketItem>();
@@ -22,6 +23,7 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #region Public Commands
         public async Task AddProductToBasket(Product product, ProductQuantity qty)
         {
+            await Task.CompletedTask;
             /*
              * Do any db checks & validation checks
              */ 
@@ -32,10 +34,12 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         }
         public async Task AdjustProductQty(Product product, ProductQuantity qty)
         {
+            await Task.CompletedTask;
             RaiseEvent(new ProductQuantityAdjusted(product, qty));
         }
         public async Task RemoveProductFromBasket(Product product)
         {
+            await Task.CompletedTask;
             RaiseEvent(new ProductRemovedFromShoppingCart(product));
         }
         #endregion
