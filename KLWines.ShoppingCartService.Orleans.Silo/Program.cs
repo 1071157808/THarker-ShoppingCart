@@ -1,6 +1,7 @@
 ﻿using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace KLWines.ShoppingCartService.Orleans.Silo
@@ -38,8 +39,11 @@ namespace KLWines.ShoppingCartService.Orleans.Silo
                 {
                     options.ClusterId = "dev";
                     options.ServiceId = "Shopping Cart Service";
-                });
-                //.ConfigureApplicationParts(parts => null)
+                })
+                .Configure<EndpointOptions>(options =>
+                 {
+                     options.AdvertisedIPAddress = IPAddress.Loopback;
+                 });
                 //.ConfigureLogging(logging => logging.AddConsole());
 
             var host = builder.Build();

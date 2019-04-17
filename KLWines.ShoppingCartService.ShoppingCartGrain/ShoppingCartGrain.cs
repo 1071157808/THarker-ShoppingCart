@@ -24,5 +24,10 @@ namespace KLWines.ShoppingCartService.ShoppingCartGrain
         public async Task AddProductToBasket(Product product, ProductQuantity qty) => await Execute(async () => await _shoppingCart.AddProductToBasket(product, qty));
         public async Task RemoveProductFromBasket(Product product) => await Execute(async () => await _shoppingCart.RemoveProductFromBasket(product));
         public async Task AdjustProductQuantity(Product product, ProductQuantity qty) => await Execute(async () => await _shoppingCart.AdjustProductQty(product, qty));
+
+
+        public async Task<long> CountTotalProducts() => _shoppingCart.CountTotalProducts();
+        public async Task<long> CountUniqueProducts() => _shoppingCart.CountUniqueProducts();
+
     }
 }

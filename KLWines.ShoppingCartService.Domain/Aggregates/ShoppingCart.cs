@@ -46,7 +46,7 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 
 
         #region Public Getters
-        public int CountUniqueProducts() => BasketItems.Select(i => i.Product).Distinct().Count();
+        public long CountUniqueProducts() => BasketItems.Select(i => i.Product).Distinct().Count();
         public long CountTotalProducts() => BasketItems.Sum(i => i.Qty.Value);
         #endregion
 
@@ -72,7 +72,6 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         {
             BasketItems = ((Snapshot)snapshot).BasketItems;
         }
-
     }
 
     public class Snapshot : ISnapshot

@@ -82,12 +82,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BaseEventStoreGrain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartGrain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.csproj">
+      <Project>{B23B86F9-DA6B-490D-9D02-62D75DCE210A}</Project>
+      <Name>KLWines.ShoppingCartService.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain.Interfaces\KLWines.ShoppingCartService.Domain.Interfaces.csproj">
+      <Project>{0593A9E2-B66B-40E6-A796-6C34B50BDE2D}</Project>
+      <Name>KLWines.ShoppingCartService.Domain.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain\KLWines.ShoppingCartService.Domain.csproj">
+      <Project>{470AAC1B-ECDF-4662-A315-7DADAD5B590B}</Project>
+      <Name>KLWines.ShoppingCartService.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KLWines.ShoppingCartService.ShoppingCartGrain.Inter\KLWines.ShoppingCartService.ShoppingCartGrain.Inter.csproj">
+      <Project>{30E20F47-F2C1-446B-BE55-B6367C84C67B}</Project>
+      <Name>KLWines.ShoppingCartService.ShoppingCartGrain.Inter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Orleans.CodeGenerator.MSBuild.2.3.0\build\Microsoft.Orleans.CodeGenerator.MSBuild.targets" Condition="Exists('..\packages\Microsoft.Orleans.CodeGenerator.MSBuild.2.3.0\build\Microsoft.Orleans.CodeGenerator.MSBuild.targets')" />
@@ -97,6 +116,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Orleans.CodeGenerator.MSBuild.2.3.0\build\Microsoft.Orleans.CodeGenerator.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Orleans.CodeGenerator.MSBuild.2.3.0\build\Microsoft.Orleans.CodeGenerator.MSBuild.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Azure.DocumentDB.2.1.3\build\Microsoft.Azure.DocumentDB.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Azure.DocumentDB.2.1.3\build\Microsoft.Azure.DocumentDB.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Orleans.OrleansCodeGenerator.Build.2.3.0\build\Microsoft.Orleans.OrleansCodeGenerator.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Orleans.OrleansCodeGenerator.Build.2.3.0\build\Microsoft.Orleans.OrleansCodeGenerator.Build.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Azure.DocumentDB.2.1.3\build\Microsoft.Azure.DocumentDB.targets" Condition="Exists('..\packages\Microsoft.Azure.DocumentDB.2.1.3\build\Microsoft.Azure.DocumentDB.targets')" />
+  <Import Project="..\packages\Microsoft.Orleans.OrleansCodeGenerator.Build.2.3.0\build\Microsoft.Orleans.OrleansCodeGenerator.Build.targets" Condition="Exists('..\packages\Microsoft.Orleans.OrleansCodeGenerator.Build.2.3.0\build\Microsoft.Orleans.OrleansCodeGenerator.Build.targets')" />
 </Project>

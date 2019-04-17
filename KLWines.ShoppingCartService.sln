@@ -11,15 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLWines.ShoppingCartService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLWines.ShoppingCartService.Domain.Core", "KLWines.ShoppingCartService.Domain.Core\KLWines.ShoppingCartService.Domain.Core.csproj", "{B23B86F9-DA6B-490D-9D02-62D75DCE210A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.Orleans.ShoppingCartGrain", "KLWines.ShoppingCartService.Orleans.ShoppingCartGrain\KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.csproj", "{CE292902-8937-453F-A81A-CCC31A5BDDE1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces", "KLWines.ShoppingCartService.Orleans.ShoppingCart.Interface\KLWines.ShoppingCartService.Orleans.ShoppingCartGrain.Interfaces.csproj", "{D45EF4C7-7744-4923-A4D1-B315943BABB2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLWines.ShoppingCartService.Orleans.Silo", "KLWines.ShoppingCartService.Orleans.Silo\KLWines.ShoppingCartService.Orleans.Silo.csproj", "{0F04B0F4-018E-42F2-9C5C-AB6884FF6EEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.ShoppingCartGrain", "KLWines.ShoppingCartService.ShoppingCartGrain\KLWines.ShoppingCartService.ShoppingCartGrain.csproj", "{2E53AD78-8626-4A06-95E3-140F9ABBB1F7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.ShoppingCartGrain.Inter", "KLWines.ShoppingCartService.ShoppingCartGrain.Inter\KLWines.ShoppingCartService.ShoppingCartGrain.Inter.csproj", "{30E20F47-F2C1-446B-BE55-B6367C84C67B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.ShoppingCartGrain", "KLWines.ShoppingCartService.ShoppingCartGrain\KLWines.ShoppingCartService.ShoppingCartGrain.csproj", "{351408CC-0565-4E70-AFE0-6B176058FC0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLWines.ShoppingCartService.Orleans.Client", "KLWines.ShoppingCartService.Orleans.Client\KLWines.ShoppingCartService.Orleans.Client.csproj", "{92F8A6E3-3DF8-4C93-9CE0-04526CCA95A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,26 +41,22 @@ Global
 		{B23B86F9-DA6B-490D-9D02-62D75DCE210A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B23B86F9-DA6B-490D-9D02-62D75DCE210A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B23B86F9-DA6B-490D-9D02-62D75DCE210A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE292902-8937-453F-A81A-CCC31A5BDDE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE292902-8937-453F-A81A-CCC31A5BDDE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE292902-8937-453F-A81A-CCC31A5BDDE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE292902-8937-453F-A81A-CCC31A5BDDE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D45EF4C7-7744-4923-A4D1-B315943BABB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D45EF4C7-7744-4923-A4D1-B315943BABB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D45EF4C7-7744-4923-A4D1-B315943BABB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D45EF4C7-7744-4923-A4D1-B315943BABB2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F04B0F4-018E-42F2-9C5C-AB6884FF6EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F04B0F4-018E-42F2-9C5C-AB6884FF6EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F04B0F4-018E-42F2-9C5C-AB6884FF6EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F04B0F4-018E-42F2-9C5C-AB6884FF6EEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E53AD78-8626-4A06-95E3-140F9ABBB1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E53AD78-8626-4A06-95E3-140F9ABBB1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E53AD78-8626-4A06-95E3-140F9ABBB1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E53AD78-8626-4A06-95E3-140F9ABBB1F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30E20F47-F2C1-446B-BE55-B6367C84C67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30E20F47-F2C1-446B-BE55-B6367C84C67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30E20F47-F2C1-446B-BE55-B6367C84C67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30E20F47-F2C1-446B-BE55-B6367C84C67B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{351408CC-0565-4E70-AFE0-6B176058FC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351408CC-0565-4E70-AFE0-6B176058FC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351408CC-0565-4E70-AFE0-6B176058FC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351408CC-0565-4E70-AFE0-6B176058FC0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92F8A6E3-3DF8-4C93-9CE0-04526CCA95A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92F8A6E3-3DF8-4C93-9CE0-04526CCA95A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92F8A6E3-3DF8-4C93-9CE0-04526CCA95A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92F8A6E3-3DF8-4C93-9CE0-04526CCA95A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

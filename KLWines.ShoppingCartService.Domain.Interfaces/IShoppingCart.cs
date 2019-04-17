@@ -14,7 +14,7 @@ namespace KLWines.ShoppingCartService.Domain.Interfaces
         Task AdjustProductQty(Product product, ProductQuantity qty);
 
 
-        int CountUniqueProducts();
+        long CountUniqueProducts();
         long CountTotalProducts();
     }
 }
