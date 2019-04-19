@@ -5,10 +5,10 @@ using System.Text;
 
 namespace KLWines.ShoppingCartService.Domain.Core.Events
 {
-    public class ProductQuantityAdjusted : IEvent
+    public struct ProductQuantityAdjusted : IEvent
     {
-        public Product Product { get; private set; }
-        public ProductQuantity Qty { get; private set; }
+        public Product Product { get; }
+        public ProductQuantity Qty { get; }
         public ProductQuantityAdjusted(Product product, ProductQuantity qty)
         {
             Product = product;

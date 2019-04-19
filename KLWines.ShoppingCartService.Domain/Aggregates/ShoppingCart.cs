@@ -12,12 +12,28 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 {
     public class ShoppingCart : BaseEventStoreAggregate, IShoppingCart
     {
-        private List<BasketItem> BasketItems { get; set; }
+        private ShoppingCartId Id { get; set; }
+        private ShopperId? ShopperId { get; set; }
+        private readonly List<BasketItem> BasketItems = new List<BasketItem>();
+
+
 
         public ShoppingCart() { }
+        public ShoppingCart(ShoppingCartId id, AnonomousShopperId anonomousShopperId)
+        {
+            //raise anonomous hsopping cart created.
+        }
+        public ShoppingCart(ShoppingCartId id, ShopperId? shopperId)
+        {
+            RaiseEvent(new ShoppingCartCreated(id, shopperId));
+        }
+
+        /*
+         *  Used to hydrate model from eventstore
+         */ 
         public ShoppingCart(List<IEvent> events = null, Snapshot snapshot = null) : base(events, snapshot)
         {
-            BasketItems = new List<BasketItem>();
+            
         }
 
         #region Public Commands
@@ -42,6 +58,14 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
             await Task.CompletedTask;
             RaiseEvent(new ProductRemovedFromShoppingCart(product));
         }
+        public async Task MergeShoppingCart(ShoppingCartId sourceShoppingCart, Dictionary<Product, ProductQuantity> listOfItems)
+        {
+            
+            await Task.CompletedTask;
+        }
+
+
+
         #endregion
 
 
@@ -62,15 +86,11 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         #endregion
 
 
-        protected override void ApplyEvent(IEvent @event)
-        {
-            dynamic me = this;
-            me.Apply((dynamic)@event);
-        }
+        
 
         protected override void ApplySnapshot(ISnapshot snapshot)
         {
-            BasketItems = ((Snapshot)snapshot).BasketItems;
+            BasketItems.AddRange(((Snapshot)snapshot).BasketItems);
         }
     }
 

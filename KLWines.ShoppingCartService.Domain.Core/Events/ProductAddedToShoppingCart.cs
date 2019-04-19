@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KLWines.ShoppingCartService.Domain.Core.Events
 {
-    public class ProductAddedToShoppingCart : IEvent
+    public struct ProductAddedToShoppingCart : IEvent
     {
         public Product Product { get; private set; }
         public ProductQuantity Qty { get; private set; }

@@ -41,7 +41,12 @@ namespace KLWines.ShoppingCartService.Domain
             NewEvents.Add(@event);
         }
 
-        protected abstract void ApplyEvent(IEvent @event);
+        private void ApplyEvent(IEvent @event)
+        {
+            dynamic me = this;
+            me.Apply((dynamic)@event);
+        }
+
         protected abstract void ApplySnapshot(ISnapshot snapshot);
 
         public void ApplyEvents(IReadOnlyCollection<IEvent> events)

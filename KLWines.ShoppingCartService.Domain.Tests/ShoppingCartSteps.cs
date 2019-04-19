@@ -23,7 +23,6 @@ namespace KLWines.ShoppingCartService.Domain.Tests
         public void GivenTheShoppingCartIsEmpty()
         {
             //ScenarioContext.Current.Add();
-            _shoppingCart = new ShoppingCart();
 
 
         }
@@ -31,17 +30,25 @@ namespace KLWines.ShoppingCartService.Domain.Tests
         public void GivenTheShoppingCartIsEmpty(IEnumerable<ProductRow> table)
         {
             //ScenarioContext.Current.Add();
-            _shoppingCart = new ShoppingCart();
 
+            foreach (var row in table)
+            {
+                await _shoppingCart.AddProductToBasket(new Product(row.Sku, ""), new ProductQuantity(row.Qty));
+            }
+            ((ShoppingCart)_shoppingCart).ApplyEvents(((ShoppingCart)_shoppingCart).PopNewEvents());
 
         }
 
-        [When(@"I add items to the shopping cart")]
+        [When(@"I add item to the shopping cart")]
         public async Task WhenIAddItemsToTheShoppingCart(IEnumerable<ProductRow> table)
         {
-            foreach(var row in table)
+            try
             {
                 await _shoppingCart.AddProductToBasket(new Product(row.Sku, ""), new ProductQuantity(row.Qty));
+            }
+            catch(Exception ex)
+            {
+                //add exception to context
             }
         }
 
@@ -57,13 +64,13 @@ namespace KLWines.ShoppingCartService.Domain.Tests
 
 
         [Then(@"I should have ([0-9]*) unique items in my shopping cart")]
-        public async Task ThenIShouldHaveUniqueItemsInMyShoppingCart(int expectedValue)
+        public void ThenIShouldHaveUniqueItemsInMyShoppingCart(int expectedValue)
         {
             Assert.AreEqual(expectedValue,  _shoppingCart.CountUniqueProducts());
         }
         
         [Then(@"I should have ([0-9]*) total items in my shopping cart")]
-        public async Task ThenIShouldHaveTotalItemsInMyShoppingCart(int expectedValue)
+        public void ThenIShouldHaveTotalItemsInMyShoppingCart(int expectedValue)
         {
             Assert.AreEqual(expectedValue, _shoppingCart.CountTotalProducts());
         }

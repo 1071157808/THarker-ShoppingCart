@@ -26,6 +26,17 @@ namespace KLWines.ShoppingCartService.ShoppingCartGrain
         public async Task AdjustProductQuantity(Product product, ProductQuantity qty) => await Execute(async () => await _shoppingCart.AdjustProductQty(product, qty));
 
 
+        public async Task MergeShoppingCart(ShoppingCartId sourceShoppingCartId, Dictionary<Product, ProductQuantity> listOfItems)
+        {
+            _shoppingCart.MergeShoppingCart(sourceShoppingCartId, )
+        }
+
+        public async Task MergeShoppingCartInto(ShoppingCartId targetShoppingCartId)
+        {
+            await GrainFactory.GetGrain<IShoppingCartGrain>(targetShoppingCartId.Value).MergeShoppingCart();
+            //raise event that shopping cart has been merged into.
+        }
+
         public async Task<long> CountTotalProducts() => _shoppingCart.CountTotalProducts();
         public async Task<long> CountUniqueProducts() => _shoppingCart.CountUniqueProducts();
 
