@@ -60,10 +60,8 @@ namespace KLWines.ShoppingCartService.ShoppingCartGrain
                 var snapshot = stream.Value.Snapshot.Value.Data as ISnapshot;
 
                 this.Aggregate = new TAggregate();
-                this.Aggregate.Init(events, snapshot);
+                this.Aggregate.Init(events, snapshot, new ProxyRepository(this.GrainFactory));
             }
         }
-
-
     }
 }

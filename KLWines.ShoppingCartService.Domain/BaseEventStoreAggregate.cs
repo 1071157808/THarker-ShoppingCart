@@ -14,15 +14,18 @@ namespace KLWines.ShoppingCartService.Domain
         protected ulong Version { get; set; }
 
         protected readonly List<IEvent> NewEvents = new List<IEvent>();
+        protected IProxyRepository ProxyRepository { get; private set; }
 
         public BaseEventStoreAggregate() { }
-        public BaseEventStoreAggregate(IEnumerable<IEvent> events = null, ISnapshot snapshot = null)
+        public BaseEventStoreAggregate(IEnumerable<IEvent> events, ISnapshot snapshot)
         {
-            Init(events, snapshot);
+            Init(events, snapshot, null);
         }
 
-        public void Init(IEnumerable<IEvent> events = null, ISnapshot snapshot = null)
+        public void Init(IEnumerable<IEvent> events, ISnapshot snapshot, IProxyRepository proxyRepository)
         {
+            this.ProxyRepository = proxyRepository;
+
             if (snapshot != null)
             {
                 ApplySnapshot(snapshot);

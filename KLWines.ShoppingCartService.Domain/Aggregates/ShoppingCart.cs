@@ -15,7 +15,7 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
         private List<BasketItem> BasketItems { get; set; }
 
         public ShoppingCart() { }
-        public ShoppingCart(List<IEvent> events = null, Snapshot snapshot = null) : base(events, snapshot)
+        public ShoppingCart(List<IEvent> events, Snapshot snapshot) : base(events, snapshot)
         {
             BasketItems = new List<BasketItem>();
         }
@@ -31,6 +31,9 @@ namespace KLWines.ShoppingCartService.Domain.Aggregates
 
             //if successful rais event that item was added
             RaiseEvent(new ProductAddedToShoppingCart(product, qty));
+
+            // Just a dummy code to show how to use the Proxy
+            await this.ProxyRepository.GetShoppingCartProxy(Guid.NewGuid()).AddProductToBasket(product, qty);
         }
         public async Task AdjustProductQty(Product product, ProductQuantity qty)
         {
