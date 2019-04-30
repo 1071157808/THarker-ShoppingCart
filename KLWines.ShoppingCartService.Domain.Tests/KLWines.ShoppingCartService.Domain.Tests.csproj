@@ -131,10 +131,6 @@
       <Project>{0593A9E2-B66B-40E6-A796-6C34B50BDE2D}</Project>
       <Name>KLWines.ShoppingCartService.Domain.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain\KLWines.ShoppingCartService.Domain.csproj">
-      <Project>{470AAC1B-ECDF-4662-A315-7DADAD5B590B}</Project>
-      <Name>KLWines.ShoppingCartService.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

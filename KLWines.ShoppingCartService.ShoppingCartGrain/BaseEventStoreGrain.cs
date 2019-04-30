@@ -11,11 +11,9 @@ using System.Threading.Tasks;
 
 namespace KLWines.ShoppingCartService.ShoppingCartGrain
 {
-    public abstract class BaseEventStoreGrain<TAggregate> : Grain
-        where TAggregate : BaseEventStoreAggregate, new()
+    public abstract class BaseEventStoreGrain : Grain
     {
         protected IEventStore EventStore { get; set; }
-        protected TAggregate Aggregate { get; set; }
         protected string EventStoreKey { get; set; }
         protected ulong Version { get; set; }
         protected List<IEvent> NewEvents { get; set; }
@@ -72,15 +70,15 @@ namespace KLWines.ShoppingCartService.ShoppingCartGrain
             catch (Exception ex)
             {
                 //if exception ocurs while executing the command, we want to rollback any events that may have been added where the action wasn't successful
-                Aggregate.PopNewEvents();
+                PopNewEvents();
                 throw;
             }
-            var newEvents = Aggregate.PopNewEvents();
+            var newEvents = PopNewEvents();
 
             if (newEvents.Count > 0)
             {
                 //store in event store
-                Aggregate.ApplyEvents(newEvents);
+                ApplyEvents(newEvents);
                 //create snapshot
             }
         }
@@ -104,8 +102,7 @@ namespace KLWines.ShoppingCartService.ShoppingCartGrain
                 var events = stream.Value.Events.ToList().Select(e => e.Body as IEvent).ToList();
                 var snapshot = stream.Value.Snapshot.Value.Data as ISnapshot;
 
-                this.Aggregate = new TAggregate();
-                this.Aggregate.Init(events, snapshot);
+                Init(events, snapshot);
             }
         }
 

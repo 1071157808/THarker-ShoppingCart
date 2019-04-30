@@ -99,10 +99,6 @@
       <Project>{0593A9E2-B66B-40E6-A796-6C34B50BDE2D}</Project>
       <Name>KLWines.ShoppingCartService.Domain.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KLWines.ShoppingCartService.Domain\KLWines.ShoppingCartService.Domain.csproj">
-      <Project>{470AAC1B-ECDF-4662-A315-7DADAD5B590B}</Project>
-      <Name>KLWines.ShoppingCartService.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KLWines.ShoppingCartService.ShoppingCartGrain.Inter\KLWines.ShoppingCartService.ShoppingCartGrain.Inter.csproj">
       <Project>{30E20F47-F2C1-446B-BE55-B6367C84C67B}</Project>
       <Name>KLWines.ShoppingCartService.ShoppingCartGrain.Inter</Name>

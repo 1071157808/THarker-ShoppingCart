@@ -1,5 +1,4 @@
 ﻿using Eveneum;
-using KLWines.ShoppingCartService.Domain.Aggregates;
 using KLWines.ShoppingCartService.Domain.Core.Events;
 using KLWines.ShoppingCartService.Domain.Core.ValueObjects;
 using KLWines.ShoppingCartService.Domain.Interfaces;
@@ -13,13 +12,12 @@ using System.Threading.Tasks;
 
 namespace KLWines.ShoppingCartService.ShoppingCartGrain
 {
-    public class ShoppingCartGrain : BaseEventStoreGrain<ShoppingCart>, IShoppingCartGrain
+    public class ShoppingCartGrain : BaseEventStoreGrain, IShoppingCartGrain
     {
         private ShoppingCartId Id { get; set; }
         private ShopperId ShopperId { get; set; }
 
         private readonly List<BasketItem> BasketItems = new List<BasketItem>();
-        private Domain.Aggregates.ShoppingCart ShoppingCart { get; set; }
 
         public ShoppingCartGrain()
         {

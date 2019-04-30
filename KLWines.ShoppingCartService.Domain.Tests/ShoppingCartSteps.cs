@@ -1,5 +1,4 @@
-﻿using KLWines.ShoppingCartService.Domain.Aggregates;
-using KLWines.ShoppingCartService.Domain.Core.ValueObjects;
+﻿using KLWines.ShoppingCartService.Domain.Core.ValueObjects;
 using KLWines.ShoppingCartService.Domain.Interfaces;
 using KLWines.ShoppingCartService.Domain.Tests.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
