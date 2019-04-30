@@ -6,8 +6,8 @@ namespace KLWines.ShoppingCartService.Domain.Core.ValueObjects
 {
     public class BasketItem
     {
-        public Product Product { get; private set; }
-        public ProductQuantity Qty { get; private set; }
+        public Product Product { get; }
+        public ProductQuantity Qty { get; }
 
         public BasketItem(Product product, ProductQuantity qty)
         {

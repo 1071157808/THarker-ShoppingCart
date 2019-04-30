@@ -18,9 +18,49 @@ namespace KLWines.ShoppingCartService.ShoppingCartGrain
         protected TAggregate Aggregate { get; set; }
         protected string EventStoreKey { get; set; }
         protected ulong Version { get; set; }
+        protected List<IEvent> NewEvents { get; set; }
 
         public BaseEventStoreGrain()
         {
+        }
+
+        protected void Init(IEnumerable<IEvent> events = null, ISnapshot snapshot = null)
+        {
+            if(snapshot != null)
+            {
+                ApplySnapshot(snapshot);
+            }
+            if(events != null)
+            {
+                foreach(var @event in events)
+                {
+                    ApplyEvent(@event);
+                }
+            }
+        }
+
+        protected abstract void ApplySnapshot(ISnapshot snapshot);
+
+        protected void ApplyEvents(IReadOnlyCollection<IEvent> events)
+        {
+            foreach(var @event in events)
+            {
+                ApplyEvent(@event);
+                Version++;
+
+            }
+        }
+        protected void ApplyEvent(IEvent @event)
+        {
+            dynamic me = this;
+            me.Apply((dynamic)@event);
+        }
+
+        public IReadOnlyCollection<IEvent> PopNewEvents()
+        {
+            var newEvents = NewEvents.ToArray();
+            NewEvents.Clear();
+            return newEvents;
         }
 
         protected async Task Execute(Func<Task> function)
@@ -43,6 +83,11 @@ namespace KLWines.ShoppingCartService.ShoppingCartGrain
                 Aggregate.ApplyEvents(newEvents);
                 //create snapshot
             }
+        }
+
+        protected void RaiseEvent(IEvent @event)
+        {
+            NewEvents.Add(@event);
         }
 
         public override async Task OnActivateAsync()

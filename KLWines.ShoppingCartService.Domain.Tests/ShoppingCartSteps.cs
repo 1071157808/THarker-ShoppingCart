@@ -26,31 +26,31 @@ namespace KLWines.ShoppingCartService.Domain.Tests
 
 
         }
-        [Given(@"the i have these items in my shopping cart")]
-        public void GivenTheShoppingCartIsEmpty(IEnumerable<ProductRow> table)
-        {
-            //ScenarioContext.Current.Add();
+        //[Given(@"the i have these items in my shopping cart")]
+        //public void GivenTheShoppingCartIsEmpty(IEnumerable<ProductRow> table)
+        //{
+        //    //ScenarioContext.Current.Add();
 
-            foreach (var row in table)
-            {
-                await _shoppingCart.AddProductToBasket(new Product(row.Sku, ""), new ProductQuantity(row.Qty));
-            }
-            ((ShoppingCart)_shoppingCart).ApplyEvents(((ShoppingCart)_shoppingCart).PopNewEvents());
+        //    foreach (var row in table)
+        //    {
+        //        await _shoppingCart.AddProductToBasket(new Product(row.Sku, ""), new ProductQuantity(row.Qty));
+        //    }
+        //    ((ShoppingCart)_shoppingCart).ApplyEvents(((ShoppingCart)_shoppingCart).PopNewEvents());
 
-        }
+        //}
 
-        [When(@"I add item to the shopping cart")]
-        public async Task WhenIAddItemsToTheShoppingCart(IEnumerable<ProductRow> table)
-        {
-            try
-            {
-                await _shoppingCart.AddProductToBasket(new Product(row.Sku, ""), new ProductQuantity(row.Qty));
-            }
-            catch(Exception ex)
-            {
-                //add exception to context
-            }
-        }
+        //[When(@"I add item to the shopping cart")]
+        //public async Task WhenIAddItemsToTheShoppingCart(IEnumerable<ProductRow> table)
+        //{
+        //    try
+        //    {
+        //        await _shoppingCart.AddProductToBasket(new Product(row.Sku, ""), new ProductQuantity(row.Qty));
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        //add exception to context
+        //    }
+        //}
 
         [When(@"I remove items from the shopping cart")]
         public async Task WhenIRemoveItemsFromTheShoppingCart(Table table)
